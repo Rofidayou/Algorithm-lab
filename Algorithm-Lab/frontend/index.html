@@ -1,0 +1,57 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8"><meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Algorithm Lab | Code Breaker</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com"><link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=DM+Sans:wght@400;500;600;700&family=Space+Grotesk:wght@500;600;700&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="style.css"><script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+</head>
+<body>
+  <main class="container">
+    <header class="hero"><div class="eyebrow">SEARCH ALGORITHMS PLAYGROUND</div><h1>Algorithm <span>Lab</span></h1><p>Crack the color code, watch every move, and discover how search algorithms think.</p>
+      <div class="hero-tags"><span>216 possible states</span><span>4 search strategies</span><span>Live visualization</span></div>
+    </header>
+    <section class="panel setup">
+      <div class="section-heading"><div><div class="eyebrow">01 / CONFIGURATION</div><h2>Build your challenge</h2></div><button id="randomBtn" class="secondary">↻ Random challenge</button></div>
+      <div class="code-grid">
+        <div class="code-card"><label>INITIAL STATE <small>Where the search starts</small></label><div id="startSlots" class="slots"></div></div>
+        <div class="code-card"><label>GOAL STATE <small>The code to discover</small></label><div id="goalSlots" class="slots"></div></div>
+      </div>
+      <div class="actions"><div class="algorithm-select"><label for="algorithm">SEARCH STRATEGY</label><select id="algorithm"><option value="BFS">Breadth-First Search (BFS)</option><option value="DFS">Depth-First Search (DFS)</option><option value="Greedy">Greedy Best-First Search</option><option value="A*">A* Search</option><option value="ALL">Compare all algorithms</option></select></div><button id="runBtn" class="primary">Run search <span>→</span></button></div>
+      <p id="status" class="status" role="status">Choose your colors, then run a search.</p>
+    </section>
+    <section id="results" class="hidden">
+      <div class="section-title"><div><div class="eyebrow">02 / ANALYSIS</div><h2 id="resultHeading">Search results</h2></div><span id="resultBadge" class="result-badge">Completed</span></div>
+      <div id="metrics" class="metrics"></div>
+      <div id="singleDetails" class="panel hidden">
+        <div class="section-heading"><div><div class="eyebrow">SOLUTION PLAYBACK</div><h2>Watch the solution</h2></div><div class="play-controls"><button id="prevBtn" class="secondary">←</button><button id="playBtn" class="primary small">▶ Play</button><button id="nextBtn" class="secondary">→</button></div></div>
+        <div class="playback-stage"><div id="currentState" class="current-state"></div><div class="step-info"><strong id="stepCounter">Step 1 / 1</strong><span id="stepHint">Initial state</span></div><input id="stepSlider" type="range" min="0" max="0" value="0"></div>
+        <div class="path-heading"><h3>Complete solution path</h3><span id="pathLength"></span></div><div id="pathView" class="path-view"></div>
+        <h3>Exploration snapshot</h3><div id="exploredView" class="explored-view"></div>
+      </div>
+      <section id="searchGraphPanel" class="panel search-graph-panel hidden">
+        <div class="section-heading">
+          <div><div class="eyebrow">LIVE SEARCH MAP</div><h2>Watch the algorithm explore</h2>
+          <p class="subtext">Each circle is a possible code. Lines show how the algorithm reached it.</p></div>
+          <span class="graph-live-pill">● SEARCH TRACE</span>
+        </div>
+        <div class="graph-legend">
+          <span><i class="legend-dot start-dot"></i>Start</span><span><i class="legend-dot frontier-dot"></i>Waiting to be explored</span>
+          <span><i class="legend-dot explored-dot"></i>Already checked</span><span><i class="legend-dot path-dot"></i>Final solution</span>
+          <span><i class="legend-dot goal-dot"></i>Goal</span>
+        </div>
+        <div class="graph-summary"><strong id="graphStepTitle">Search begins</strong><span id="graphStepDescription">Move through the search to see how states are discovered.</span></div>
+        <div class="graph-controls"><button id="graphPrev" class="secondary">← Previous</button><input id="graphSlider" type="range" min="0" max="0" value="0"><button id="graphNext" class="secondary">Next →</button><button id="graphPlay" class="primary small">▶ Play search</button></div>
+        <div class="search-graph-scroll"><svg id="searchGraph" role="img" aria-label="Search tree visualization"></svg></div>
+        <p class="graph-tip">Tip: follow the highlighted node. The algorithm is checking that state at this moment.</p>
+      </section>
+      <div class="panel chart-panel"><div class="eyebrow">PERFORMANCE VISUALIZATION</div><h2>Algorithm performance graphs</h2><p class="subtext">Compare the amount of work each algorithm performs. Lower values are generally better for that metric.</p>
+        <div class="charts-grid"><article class="chart-card"><h3>States explored vs generated</h3><canvas id="statesChart"></canvas></article><article class="chart-card"><h3>Execution time</h3><canvas id="timeChart"></canvas></article><article class="chart-card"><h3>Path cost</h3><canvas id="pathChart"></canvas></article><article class="chart-card"><h3>Maximum frontier size</h3><canvas id="frontierChart"></canvas></article></div>
+      </div>
+      <div id="comparisonPanel" class="panel hidden"><div class="eyebrow">DETAILED COMPARISON</div><h2>Results table</h2><div class="table-wrap"><table><thead><tr><th>Algorithm</th><th>Time (ms)</th><th>Explored</th><th>Generated</th><th>Path cost</th><th>Max frontier</th></tr></thead><tbody id="comparisonBody"></tbody></table></div></div>
+    </section>
+    <footer>Algorithm Lab · Code Breaker · Educational search visualization</footer>
+  </main>
+  <script src="main.js"></script>
+</body></html>
